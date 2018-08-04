@@ -51,4 +51,17 @@
 7. 如果只有一帧有字幕，则该帧很可能是识别错误导致，抛弃该结果；
 假如当前的字幕结束时间比下一帧字幕的开始时间还要迟，就以下一帧字幕的开始时间作为当前帧字幕的结束时间
 
+# 运行
+>
+* 首先准备好一部影片，譬如bly_e07.mp4，将其转换成wav文件，
+使用命令： 
+> ffmpeg -i /movie/bly/bly_e07.mp4 -vn /movie/bly/bly_e07.wav
+* 再运行主函数即可：
+> python -u test.py --account_index=0 --video_name=/movie/bly/bly_e07.mp4 --wav_name=/movie/bly/bly_e07.wav --movie_name=bly
+
+* 如果是一部电视剧，则将电视剧保存在文件夹下，譬如/movie/bly，要将电视剧全部转成wav文件，
+> for name in `ls *.mp4`;do ffmpeg -i $name -vn ${name%.mp4}.wav;done
+
+* 再使用该批量运行的命令即可批量生成语音段文件了
+> python for_batch.py --video_path=/movie/bly --mode=single --index=0
 
