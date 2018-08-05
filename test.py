@@ -302,10 +302,12 @@ def pull_srt_from_video(video_name,save_srt_name):
             if result != "" :
                 if len(same_list) > 0:
                     ratio = Levenshtein.ratio(result, filelist[-1][-1])
-                    if ratio < 0.5:
-                        if len(same_list) > 0:
-                            filelist[-1][2] = same_rule(same_list)  # result if len(result) > len(filelist[-1][2]) else filelist[-1][2]
 
+                    if ratio < 0.5:
+                        filelist[-1][2] = same_rule(same_list)
+                        same_list = [(result, porb)]
+                        filelist.append(
+                            [num * 1.0 / framerate, num * 1.0 / framerate, result])
                     else:
                         same_list.append((result,porb))
                         filelist[-1][1] = num * 1.0 / framerate
